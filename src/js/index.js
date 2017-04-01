@@ -1,19 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ComponentHeader from './components/header';
-// const React = require('react');
-// const ReactDOM = require('react-dom');
-// const ComponentHeader = require('./components/header');
+import ComponentFooter from './components/footer';
+import ComponentBodyIndex from './components/bodyindex';
+
 class Index extends React.Component{
+	componentWillMount(){
+		console.log('Index - componentWillMount')
+	}	
+
+	componentDidMount(){
+		console.log('Index - componentDidMount')
+	}
+
 	render(){
 		return (
-			<ComponentHeader/>
+			<div>
+				<ComponentHeader/>
+				<ComponentBodyIndex/>
+				<ComponentFooter/>
+			</div>
 		)
 	}
 }
-// ReactDOM.render(
-//   <h1>Hello, world!</h1>,
-//   document.getElementById('example')
-// );
 
 ReactDOM.render(<Index/>,document.getElementById('example'))

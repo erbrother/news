@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-// console.log(React)
-// console.log(React.Components)
+
 class ComponentHeader extends React.Component{
 	render(){
 		return (
