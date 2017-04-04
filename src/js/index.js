@@ -5,19 +5,11 @@ import ComponentFooter from './components/footer';
 import ComponentBodyIndex from './components/bodyindex';
 
 class Index extends React.Component{
-	componentWillMount(){
-		console.log('Index - componentWillMount')
-	}	
-
-	componentDidMount(){
-		console.log('Index - componentDidMount')
-	}
-
 	render(){
 		return (
 			<div>
 				<ComponentHeader/>
-				<ComponentBodyIndex/>
+				<ComponentBodyIndex userId={9527}/>
 				<ComponentFooter/>
 			</div>
 		)
