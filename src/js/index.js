@@ -9,7 +9,7 @@ class Index extends React.Component{
 		return (
 			<div>
 				<ComponentHeader/>
-				<ComponentBodyIndex userId={9527}/>
+				<ComponentBodyIndex userId={123} username={"herry"}/>
 				<ComponentFooter/>
 			</div>
 		)
