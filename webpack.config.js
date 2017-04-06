@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = {
   context: path.join(__dirname),
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./src/js/index.js",
+  entry: "./src/js/root.js",
   module: {
     loaders: [
       {
@@ -18,12 +18,12 @@ module.exports = {
         }
       },
       //下面是使用 ant-design 的配置文件
-      { test: /\.css$/, loader: 'style-loader!css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]' }
+      { test: /\.css$/, loader: 'style-loader!css-loader' }
     ]
   },
   output: {
     path: __dirname,
-    filename: "./dist/js/bundle.js"
+    filename: "./src/bundle.js"
   },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
