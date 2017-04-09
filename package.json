@@ -27,7 +27,8 @@
     "webpack-dev-server": "^1.16.1"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.0.1"
+    "babel-plugin-import": "^1.0.1",
+    "react-responsive": "^1.2.7"
   },
   "repository": {
     "type": "git",
