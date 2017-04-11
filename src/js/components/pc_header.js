@@ -11,6 +11,7 @@ import {
 	CheckBox,
 	Modal,
  } from 'antd';
+// import {request} from 'request';
 
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
@@ -33,6 +34,7 @@ class PCHeader extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 		this.handleOk = this.handleOk.bind(this);
 		this.handleCancel = this.handleCancel.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
 	};
 
@@ -40,8 +42,36 @@ class PCHeader extends React.Component {
   	if (e.key === "register") {
 	    this.setState({
 	      visible: true,
+	      current: 'register'
 	    });
+  	} else {
+  		this.setState({
+  			current: e.key
+  		})
   	}
+  };
+
+  handleSubmit(e) {
+  	e.preventDefault();
+  	var myFetchOptions = {
+  		method: 'GET'
+  	};
+  	var formData = this.props.form.getFieldsValue();
+  	fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&password=password&r_userName="+ formData.userName+"&r_password="+ formData.password +"&r_confirmPassword=" + formData.comfirmPassword, myFetchOptions)
+  	.then(response=>response.json())
+  	.then(json=>{
+  		console.log(json===true)
+  		if (json === true) {
+  			message.success('注册地成功');
+  			this.setState({
+  				userNickName: '',
+  				hasLogined: true,
+  				visible: false
+  			})
+  		}
+  	})
+
+  	console.log(formData)
   };
 
   handleOk (e) {
@@ -52,9 +82,9 @@ class PCHeader extends React.Component {
   };
 
   handleCancel (e){
-    
     this.setState({
       visible: false,
+
     });
   };
 
@@ -127,21 +157,21 @@ class PCHeader extends React.Component {
 	        			{getFieldDecorator('userName', {
 			            rules: [{ required: true, message: 'Please input your username!' }],
 			          })(
-			            <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
+			            <Input type="text" prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
 			          )}
         			</FormItem>
         			<FormItem>
         				{getFieldDecorator('password', {
 			            rules: [{ required: true, message: 'Please input your password!' }],
 			          })(
-			            <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="Password" />
+			            <Input type="password" prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="Password" />
 			          )}
         			</FormItem>
         			<FormItem>
         				{getFieldDecorator('comfirmPassword', {
 			            rules: [{ required: true, message: 'Please input your password again!' }],
 			          })(
-			            <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="comfirm your Password" />
+			            <Input type="password" prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="comfirm your Password" />
 			          )}
         			</FormItem>
         			<Button type="primary" htmlType="submit">注册</Button>
@@ -154,4 +184,4 @@ class PCHeader extends React.Component {
 	}
 };
 
-export default PCHeader = Form.create({})(PCHeader);
+export default PCHeader = Form.create()(PCHeader);
