@@ -11,6 +11,8 @@ import {
 	CheckBox,
 	Modal,
  } from 'antd';
+ import {Router, Route, hashHistory, Link} from 'react-router';
+
 // import {request} from 'request';
 
 const FormItem = Form.Item;
@@ -57,14 +59,15 @@ class PCHeader extends React.Component {
   		method: 'GET'
   	};
   	var formData = this.props.form.getFieldsValue();
+  	console.log(formData)
   	fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&password=password&r_userName="+ formData.userName+"&r_password="+ formData.password +"&r_confirmPassword=" + formData.comfirmPassword, myFetchOptions)
   	.then(response=>response.json())
   	.then(json=>{
-  		console.log(json===true)
+  		// console.log(json===true)
   		if (json === true) {
   			message.success('注册地成功');
   			this.setState({
-  				userNickName: '',
+  				userNickName: formData.userName,
   				hasLogined: true,
   				visible: false
   			})
