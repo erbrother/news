@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import {Router, Route, Link} from 'react-router';
 import { 
 	Menu, 
 	Icon,
@@ -35,7 +36,39 @@ class PCHeader extends React.Component {
 		this.handleOk = this.handleOk.bind(this);
 		this.handleCancel = this.handleCancel.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.callback = this.callback.bind(this);
+		this.logout = this.logout.bind(this);
 
+	};
+
+	componentWillMount() {
+		if ( localStorage.userid !== "" &&  localStorage.userid !== undefined) {
+			this.setState({
+				hasLogined: true,
+				userNickName: localStorage.userNickName,
+				userid: localStorage.userid
+			})
+		}
+	}
+	logout() {
+		localStorage.userid = "";
+		localStorage.userNickName = "";
+		this.setState({
+			hasLogined: false
+		})
+	};
+
+	callback(key) {
+		if ( key === "1" ) {
+			this.setState({
+				action: 'login'
+			})
+		}
+		else if ( key === "2") {
+			this.setState({
+				action: "register"
+			})
+		}
 	};
 
   handleClick(e) {
@@ -57,25 +90,35 @@ class PCHeader extends React.Component {
   		method: 'GET'
   	};
   	var formData = this.props.form.getFieldsValue();
-  	fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&password=password&r_userName="+ formData.userName+"&r_password="+ formData.password +"&r_confirmPassword=" + formData.comfirmPassword, myFetchOptions)
+  	fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action + "&username="+formData.userName+"&password="+ formData.password +"&r_userName="+ formData.r_userName+"&r_password="+ formData.r_password +"&r_confirmPassword=" + formData.r_comfirmPassword, myFetchOptions)
   	.then(response=>response.json())
   	.then(json=>{
-  		console.log(json===true)
-  		if (json === true) {
+  		if ( this.state.action === "register" && json === true) {
   			message.success('注册地成功');
+  			// console.log(formData)
   			this.setState({
-  				userNickName: '',
+  				userNickName: formData.r_userName,
   				hasLogined: true,
   				visible: false
-  			})
+  			})			
+  		} 
+  		else if (this.state.action === "login" && json)  {
+  			message.success('登陆成功');
+
+  			this.setState({
+  				userNickName: json.NickUserName,
+  				userid: json.UserId,
+  				hasLogined: true,
+  				visible: false
+  			});
+
+  			localStorage.userid = json.UserId;
+  			localStorage.userNickName = json.NickUserName
   		}
   	})
-
-  	console.log(formData)
   };
 
   handleOk (e) {
-    
     this.setState({
       visible: false,
     });
@@ -100,7 +143,7 @@ class PCHeader extends React.Component {
 				<Button type="dashed" htmlType="button">个人中心</Button>
 			</Link>
 			&nbsp;&nbsp;
-			<Button type="ghost" htmlType="button">退出</Button>
+			<Button type="ghost" htmlType="button" onClick={this.logout}>退出</Button>
 		</Menu.Item>
 		:
 		<Menu.Item key="register" class="register">
@@ -150,34 +193,53 @@ class PCHeader extends React.Component {
 				<Modal wrapClassName="vertical-center-modal" visible={this.state.visible}
           onOk={this.handleOk} onCancel={this.handleCancel} footer={null}
         >
-        <Tabs type="card">
-        	<TabPane tab="注册" key="2">
-        		<Form onSubmit={this.handleSubmit}> 
-        			<FormItem>
-	        			{getFieldDecorator('userName', {
-			            rules: [{ required: true, message: 'Please input your username!' }],
-			          })(
-			            <Input type="text" prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
-			          )}
-        			</FormItem>
-        			<FormItem>
-        				{getFieldDecorator('password', {
-			            rules: [{ required: true, message: 'Please input your password!' }],
-			          })(
-			            <Input type="password" prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="Password" />
-			          )}
-        			</FormItem>
-        			<FormItem>
-        				{getFieldDecorator('comfirmPassword', {
-			            rules: [{ required: true, message: 'Please input your password again!' }],
-			          })(
-			            <Input type="password" prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="comfirm your Password" />
-			          )}
-        			</FormItem>
-        			<Button type="primary" htmlType="submit">注册</Button>
-        		</Form>
-        	</TabPane>
-        </Tabs>
+	        <Tabs type="card" onChange={this.callback} class="tabPane">
+	        	<TabPane tab="登陆" key="1">
+	        		<Form> 
+	        			<FormItem>
+		        			{getFieldDecorator('userName', {
+				            rules: [{ required: true, message: 'Please input your username!' }],
+				          })(
+				            <Input type="text" prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
+				          )}
+	        			</FormItem>
+	        			<FormItem>
+	        				{getFieldDecorator('password', {
+				            rules: [{ required: true, message: 'Please input your password!' }],
+				          })(
+				            <Input type="password" prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="Password" />
+				          )}
+	        			</FormItem>
+	        			<Button type="primary" htmlType="submit" onClick={this.handleSubmit}>登陆</Button>
+	        		</Form>
+	        	</TabPane>
+	        	<TabPane tab="注册" key="2">
+	        		<Form> 
+	        			<FormItem>
+		        			{getFieldDecorator('r_userName', {
+				            rules: [{ required: true, message: 'Please input your username!' }],
+				          })(
+				            <Input type="text" prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
+				          )}
+	        			</FormItem>
+	        			<FormItem>
+	        				{getFieldDecorator('r_password', {
+				            rules: [{ required: true, message: 'Please input your password!' }],
+				          })(
+				            <Input type="password" prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="Password" />
+				          )}
+	        			</FormItem>
+	        			<FormItem>
+	        				{getFieldDecorator('r_comfirmPassword', {
+				            rules: [{ required: true, message: 'Please input your password again!' }],
+				          })(
+				            <Input type="password" prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="comfirm your Password" />
+				          )}
+	        			</FormItem>
+	        			<Button type="primary" htmlType="submit" onClick={this.handleSubmit}>注册</Button>
+	        		</Form>
+	        	</TabPane>
+	        </Tabs>
         </Modal>
 			</header>
 		)

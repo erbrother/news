@@ -16,3 +16,15 @@
 .footer {
 	text-align: center;
 }
+
+.tabPane form button {
+	float: right;
+}
+
+.register {
+	float: right !important;
+}
+
+.ant-menu-horizontal > .ant-menu-item > a,.ant-menu-horizontal > .ant-menu-submenu > a {
+   display: inline-block !important;
+}
