@@ -12,6 +12,8 @@ import {
 	CheckBox,
 	Modal,
  } from 'antd';
+ import {Router, Route, hashHistory, Link} from 'react-router';
+
 // import {request} from 'request';
 
 const FormItem = Form.Item;
@@ -90,14 +92,27 @@ class PCHeader extends React.Component {
   		method: 'GET'
   	};
   	var formData = this.props.form.getFieldsValue();
+<<<<<<< HEAD
   	fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action + "&username="+formData.userName+"&password="+ formData.password +"&r_userName="+ formData.r_userName+"&r_password="+ formData.r_password +"&r_confirmPassword=" + formData.r_comfirmPassword, myFetchOptions)
   	.then(response=>response.json())
   	.then(json=>{
   		if ( this.state.action === "register" && json === true) {
+=======
+  	console.log(formData)
+  	fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=register&username=userName&password=password&r_userName="+ formData.userName+"&r_password="+ formData.password +"&r_confirmPassword=" + formData.comfirmPassword, myFetchOptions)
+  	.then(response=>response.json())
+  	.then(json=>{
+  		// console.log(json===true)
+  		if (json === true) {
+>>>>>>> 8e35382acc7023b18e157c890cc8c5141f178c7b
   			message.success('注册地成功');
   			// console.log(formData)
   			this.setState({
+<<<<<<< HEAD
   				userNickName: formData.r_userName,
+=======
+  				userNickName: formData.userName,
+>>>>>>> 8e35382acc7023b18e157c890cc8c5141f178c7b
   				hasLogined: true,
   				visible: false
   			})			
