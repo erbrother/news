@@ -24,7 +24,45 @@
 .register {
 	float: right !important;
 }
+.container {
+	padding-top: 10px;
+}
 
+.leftContainer {
+	width: 400px;
+	float: left;
+}
+
+.carousel {
+	width: 400px;
+	float: left;
+}
+
+.carousel img {
+	width: 400px;
+}
+
+.topNewsList .ant-card-body {
+	padding: 12px;
+}
+
+.topNewsList .ant-card-body ul li {
+	font-size: 13px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.topNewsList .ant-card-body ul li a {
+	color: #222;
+}
+
+.tab_news {
+	width: 500px;
+	padding-left: 10px;
+}
 .ant-menu-horizontal > .ant-menu-item > a,.ant-menu-horizontal > .ant-menu-submenu > a {
    display: inline-block !important;
+}
+
+.ant-carousel .slick-slide {
+	height: auto !important;
 }

@@ -55,7 +55,7 @@ class MobieHeader extends React.Component {
   	.then(response=>response.json())
   	.then(json=>{
   		if ( this.state.action === "register" && json === true) {
-  			message.success('注册地成功');
+  			message.success('注册成功');
   			// console.log(formData)
   			this.setState({
   				userNickName: formData.r_userName,

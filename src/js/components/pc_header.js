@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import {Router, Route, Link} from 'react-router';
 import { 
 	Menu, 
 	Icon,
@@ -11,9 +12,6 @@ import {
 	CheckBox,
 	Modal,
  } from 'antd';
- import {Router, Route, hashHistory, Link} from 'react-router';
-
-
 
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
@@ -94,17 +92,11 @@ class PCHeader extends React.Component {
   	fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action + "&username="+formData.userName+"&password="+ formData.password +"&r_userName="+ formData.r_userName+"&r_password="+ formData.r_password +"&r_confirmPassword=" + formData.r_comfirmPassword, myFetchOptions)
   	.then(response=>response.json())
   	.then(json=>{
-  	console.log(formData)
   		if (json === true) {
-
   			message.success('注册成功');
   			// console.log(formData)
   			this.setState({
-
   				userNickName: formData.r_userName,
-
-  				userNickName: formData.userName,
-
   				hasLogined: true,
   				visible: false
   			})			
