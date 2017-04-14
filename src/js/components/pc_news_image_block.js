@@ -43,7 +43,7 @@ export default class PCNewsBlock extends React.Component {
 		const newsList = news.length
 		?
 		news.map((newsItem,index)=>(
-			<Link to={'details/${newsIten.uniquekey}'} target="_blank">
+			<Link to={'details/${newsIten.uniquekey}'} class="image-block" target="_blank">
 				<div className="custom-image">
 					<img src={newsItem.thumbnail_pic_s} style={styleImage} alt=""/>
 				</div>
@@ -54,10 +54,11 @@ export default class PCNewsBlock extends React.Component {
 			</Link>
 		))
 		:
-		'没有任何数据'
+		'没有任何数据';
+
 		return (
 			<div className="topNewsList">
-				<Card title= {this.propscarTitle} bordered={true} style={{width: this.props.width}}>
+				<Card title= {this.props.cartTitle} bordered={true} style={{width: this.props.width}}>
 					{newsList}
 				</Card>
 			</div>

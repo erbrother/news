@@ -55,14 +55,48 @@
 	color: #222;
 }
 
+.topNewsList {
+    float: left;
+    text-align: left;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.topNewsList a {
+    line-height: 22px !important;
+    color: #666 !important;
+}
+
 .tab_news {
 	width: 500px;
 	padding-left: 10px;
 }
+
+.image-block {
+    float: left;
+}
+
+.custom-card {
+    padding: 5px;
+}
+
+.custom-card p {
+		width: 112px;
+		white-space: nowrap;
+		overflow : hidden;
+		text-overflow: ellipsis;
+    color: #999;
+}
+
 .ant-menu-horizontal > .ant-menu-item > a,.ant-menu-horizontal > .ant-menu-submenu > a {
    display: inline-block !important;
 }
 
 .ant-carousel .slick-slide {
+	height: auto !important;
+}
+
+.ant-tabs-nav .ant-tabs-tab {
 	height: auto !important;
 }
