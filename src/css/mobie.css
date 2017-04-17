@@ -1,6 +1,3 @@
-html{
-  font-size: 50px;
-}
 
 #mobieheader{
   flex: 1;
@@ -24,7 +21,7 @@ html{
 }
 
 #mobieheader i{
-  font-size: 0.5rem;
+  font-size: 1rem;
   float: right;
   margin-right: 0.3rem;
   margin-top: 0.3rem;
