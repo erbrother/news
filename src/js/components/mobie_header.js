@@ -72,6 +72,9 @@ class MobieHeader extends React.Component {
   				hasLogined: true,
   				visible: false
   			})
+
+  			localStorage.userid = json.UserId;
+  			localStorage.userNickName = json.NickUserName
   		}
   	})
 
@@ -98,10 +101,10 @@ class MobieHeader extends React.Component {
 
 	render () {
 		const { getFieldDecorator } = this.props.form;
-		const userShow = this.state.hasLogined ?
-		<div>
-			{ this.state.userNickName }
-		</div>
+		const userShow = this.state.hasLogined || localStorage.userid ?
+		<Link to={'/ucenter'}>
+			<Icon type="inbox" />
+		</Link>
 		:
 		<Icon type="setting" onClick={this.login} />;
 

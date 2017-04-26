@@ -36,7 +36,6 @@ class PCHeader extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.callback = this.callback.bind(this);
 		this.logout = this.logout.bind(this);
-
 	};
 
 	componentWillMount() {
@@ -131,7 +130,7 @@ class PCHeader extends React.Component {
 		<Menu.Item key="logout" class="register">
 			<Button type="primary" htmlType="button">{this.state.userNickName}</Button>
 			&nbsp;&nbsp;
-			<Link target="_blank">
+			<Link target="_blank" to={'/ucenter'}>
 				<Button type="dashed" htmlType="button">个人中心</Button>
 			</Link>
 			&nbsp;&nbsp;
@@ -153,30 +152,6 @@ class PCHeader extends React.Component {
 					</Col>
 					<Col span={16}>
 						<Menu selectedKeys={[this.state.current]} mode="horizontal" onClick={this.handleClick}>
-			        <Menu.Item key="top">
-			          <Icon type="appstore" />头条
-			        </Menu.Item>
-			        <Menu.Item key="shehui">
-			          <Icon type="appstore" />社会
-			        </Menu.Item>
-			        <Menu.Item key="guonei">
-			          <Icon type="appstore" />国内
-			        </Menu.Item>
-			        <Menu.Item key="guoji">
-			          <Icon type="appstore" />国际
-			        </Menu.Item>
-			        <Menu.Item key="yule">
-			          <Icon type="appstore" />娱乐
-			        </Menu.Item>
-			        <Menu.Item key="tiyu">
-			          <Icon type="appstore" />体育
-			        </Menu.Item>
-			        <Menu.Item key="keji">
-			          <Icon type="appstore" />科技
-			        </Menu.Item>
-			        <Menu.Item key="shishang" >
-			          <Icon type="appstore" />时尚
-			        </Menu.Item>
 			        {userShow}
 			      </Menu>
 					</Col>

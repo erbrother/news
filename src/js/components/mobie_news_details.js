@@ -2,6 +2,7 @@ import React from 'react';
 import {Row, Col, BackTop} from 'antd';
 import MobieHeader from './mobie_header';
 import MobieFooter from './mobie_footer';
+import CommonComment from './common_comments';
 
 export default class MobieNewsDetails extends React.Component {
 	constructor (){
@@ -38,6 +39,8 @@ export default class MobieNewsDetails extends React.Component {
 						<Col span={24} className="container">
 							<div className="articleContainer" dangerouslySetInnerHTML={this.createMarkup()}>
 							</div>
+							<hr/>
+							<CommonComment uniquekey={this.props.params.uniquekey}></CommonComment>
 						</Col>
 					</Row>
 				</div>
