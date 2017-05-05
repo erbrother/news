@@ -9,6 +9,7 @@ import PCUCenter from "./components/pc_ucenter";
 import MobieUCenter from "./components/mobie_ucenter";
 import {Button} from "antd";
 import "antd/dist/antd.css";
+import "../css/touch.less";
 import MediaQuery from 'react-responsive';
 
 export default class Root extends React.Component {

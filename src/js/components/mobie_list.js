@@ -1,18 +1,22 @@
 import React from "react";
 import {Card, Row, Col, Carousel} from "antd";
 import {Router, Route, Link, browserHistory} from "react-router";
-
+import Tloader from 'react-touch-loader';
 export default class MobieList extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			news: []
+			news: [],
+			count: 5,
+			hasMore: 0,
+			initializing: 1,
+			canRefreshResolve:true,
+			refreshedAt: Date.now()
 		};
-
-
 	};
 
 	componentWillMount() {
+
 		var myFetchOptions = {
 			method: "GET"
 		};
@@ -25,7 +29,61 @@ export default class MobieList extends React.Component {
 		});
 	};
 
+	loadMore(resolve) {
+
+		setTimeout(()=> {
+			var myFetchOptions = {
+				method: "GET"
+			};
+			var count = this.state.count;
+			this.setState({
+				count: count+5
+			});
+			fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type=" + this.props.type + "&count="+this.state.count, myFetchOptions)
+			.then(response => response.json())
+			.then(json => this.setState({news: json}));
+			this.setState({
+	      hasMore: count>0 && count<50
+	    });
+	    resolve();
+			
+		}, 2e3)
+	};
+
+  refresh(resolve, reject) {
+    setTimeout(() => {
+        if(!this.state.canRefreshResolve) return reject();
+
+				var myFetchOptions = {
+					method: "GET"
+				};
+
+				fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type=" + this.props.type
+				+ "&count=" + this.props.count, myFetchOptions)
+				.then(response=> response.json())
+				.then(json => {
+					this.setState({
+						news: json,
+						refreshedAt: Date.now(),
+						hasMore: 1,
+					});
+					resolve();
+				});
+    }, 2e3);
+	};
+
+	componentDidMount() {
+	  setTimeout(() => {
+	      this.setState({
+	          hasMore: 1,
+	          initializing: 2, // initialized
+	      });
+	  }, 2e3);
+  };
+
 	render() {
+		var {hasMore, initializing, refreshedAt} = this.state;
+		var { refresh, loadMore, toggleCanReresh,refresh } = this;
 		const {news} = this.state;
 
 		const newsList = news.length
@@ -57,7 +115,9 @@ export default class MobieList extends React.Component {
 			<div>
 				<Row>
 					<Col span={24}>
-						{newsList}
+						<Tloader className="main" onRefresh={this.refresh.bind(this)} onLoadMore={this.loadMore.bind(this)} hasMore={hasMore} initializing={initializing}>
+							{newsList}
+						</Tloader>
 					</Col>
 				</Row>
 			</div>
