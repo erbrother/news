@@ -14,7 +14,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015'],
-          plugins: ['react-html-attrs'], //添加组件的插件配置
+          plugins: ['react-html-attrs'] //添加组件的插件配置
         }
       },
       //下面是使用 ant-design 的配置文件
@@ -32,6 +32,11 @@ module.exports = {
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        drop_console: false,
+      }
+    }),
   ],
 };

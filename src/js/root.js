@@ -7,7 +7,6 @@ import PCNewsDetails from "./components/pc_news_details";
 import MobieNewsDetails from "./components/mobie_news_details";
 import PCUCenter from "./components/pc_ucenter";
 import MobieUCenter from "./components/mobie_ucenter";
-import {Button} from "antd";
 import "antd/dist/antd.css";
 import "../css/touch.less";
 import MediaQuery from 'react-responsive';

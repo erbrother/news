@@ -16,8 +16,15 @@ html {
 	font-size: 24px;
 	padding-left: 5px;
 }
-
-.footer {
+footer {
+    padding: 20px;
+    color: #fff;
+    background-color: black;  
+}
+.footer  {
+    padding: 20px;
+    color: #fff;
+    background-color: black;
 	text-align: center;
 }
 

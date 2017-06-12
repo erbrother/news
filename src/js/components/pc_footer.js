@@ -7,7 +7,10 @@ export default class PCFooter extends React.Component {
 			<footer>
 				<Row>
 					<Col offset={2} span={20} class="footer">
-						&copy;&nbsp;2016 ReactNews. All Rights Reserved.
+						客服热线：18009223900
+					</Col>					
+					<Col offset={2} span={20} class="footer">
+						&copy;&nbsp;2017 夏恒鑫版权所有
 					</Col>
 				</Row>
 			</footer>
